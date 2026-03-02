@@ -300,10 +300,16 @@
 
     <!-- Download Buttons -->
     <div class="dl-grid" id="dl-grid">
-      <a class="dl-btn disabled" id="btn-mac" href="#" onclick="return false">
+      <a class="dl-btn disabled" id="btn-mac-arm" href="#" onclick="return false">
         <div class="dl-icon">🍎</div>
         <div class="dl-platform">macOS</div>
-        <div class="dl-detail">Intel &amp; Apple Silicon</div>
+        <div class="dl-detail">Apple Silicon (M1/M2/M3)</div>
+        <div class="dl-label">Lade…</div>
+      </a>
+      <a class="dl-btn disabled" id="btn-mac-intel" href="#" onclick="return false">
+        <div class="dl-icon">🍎</div>
+        <div class="dl-platform">macOS</div>
+        <div class="dl-detail">Intel (x64)</div>
         <div class="dl-label">Lade…</div>
       </a>
       <a class="dl-btn disabled" id="btn-win" href="#" onclick="return false">
@@ -350,7 +356,7 @@
           <li class="step">
             <div class="step-num">3</div>
             <div class="step-text">
-              App starten — entweder per Doppelklick oder(am besten immer so öffnen ) Mac halt zahl 199 im Jahr/warte 12 Wochen bis zur License oder so:
+              App starten — entweder per Doppelklick oder:
               <div class="code-block">
                 "/Applications/MIRA Agent.app/Contents/MacOS/MIRA Agent"
                 <button class="copy-btn" onclick="copyCode(this)" title="Kopieren">⧉</button>
@@ -429,11 +435,13 @@
       document.getElementById('footer-version').textContent  = version;
 
       // Assets matchen
-      const macAsset = assets.find(a => a.name.endsWith('.dmg'));
-      const winAsset = assets.find(a => a.name.endsWith('.exe'));
+      const macArmAsset   = assets.find(a => a.name.endsWith('-arm64.dmg'));
+      const macIntelAsset = assets.find(a => a.name.endsWith('.dmg') && !a.name.includes('arm64'));
+      const winAsset      = assets.find(a => a.name.endsWith('.exe'));
 
-      setupButton('btn-mac', macAsset, version, '.dmg');
-      setupButton('btn-win', winAsset, version, '.exe');
+      setupButton('btn-mac-arm',   macArmAsset,   version, 'Apple Silicon');
+      setupButton('btn-mac-intel', macIntelAsset, version, 'Intel (x64)');
+      setupButton('btn-win',       winAsset,      version, 'Windows 64-bit');
 
     } catch (e) {
       console.error('Release fetch failed:', e);
@@ -442,14 +450,16 @@
         '<span style="color:#ff453a">Release konnte nicht geladen werden — ' +
         '<a href="https://github.com/' + REPO + '/releases" style="color:#ff453a" target="_blank">GitHub öffnen</a></span>';
 
-      // Fallback: direkt zu GitHub Releases verlinken
-      setFallbackButton('btn-mac', `https://github.com/${REPO}/releases`);
-      setFallbackButton('btn-win', `https://github.com/${REPO}/releases`);
+      const fallback = `https://github.com/${REPO}/releases`;
+      setFallbackButton('btn-mac-arm',   fallback);
+      setFallbackButton('btn-mac-intel', fallback);
+      setFallbackButton('btn-win',       fallback);
     }
   }
 
-  function setupButton(id, asset, version, ext) {
+  function setupButton(id, asset, version, label) {
     const btn = document.getElementById(id);
+    if (!btn) return;
     if (asset) {
       btn.href = asset.browser_download_url;
       btn.classList.remove('disabled');
@@ -457,10 +467,9 @@
       btn.querySelector('.dl-label').textContent = `Download ${version}`;
       const detail = btn.querySelector('.dl-detail');
       const mb = (asset.size / 1024 / 1024).toFixed(1);
-      if (id === 'btn-mac') detail.textContent = `Intel & Apple Silicon · ${mb} MB`;
-      else                  detail.textContent = `64-bit Installer · ${mb} MB`;
+      detail.textContent = `${label} · ${mb} MB`;
     } else {
-      btn.querySelector('.dl-label').textContent = 'Noch nicht verfügbar';
+      btn.querySelector('.dl-label').textContent = 'Nicht verfügbar';
       setFallbackButton(id, `https://github.com/${REPO}/releases`);
     }
   }
