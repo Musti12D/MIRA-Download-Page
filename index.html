@@ -279,7 +279,7 @@
         <div class="nav-sub">Virtueller Mitarbeiter</div>
       </div>
     </div>
-    <div class="nav-version" id="nav-version">v0.1.0</div>
+    <div class="nav-version">v1.0.0-build.8</div>
   </nav>
 
   <!-- Hero -->
@@ -293,23 +293,23 @@
       und automatisiert deinen Büroalltag — auf Mac und Windows.
     </p>
 
-    <!-- Download Buttons -->
+    <!-- Download Buttons mit deinen GitHub-Links -->
     <div class="dl-grid">
-      <a class="dl-btn" id="btn-mac-arm" href="MIRA-Agent-Mac-arm64.dmg" download>
+      <a class="dl-btn" id="btn-mac-arm" href="https://github.com/Mira12D/Mira-Download/releases/download/v1.0.0-build.8/MIRA.Agent-1.0.0-arm64.dmg" target="_blank">
         <div class="dl-icon">⌘</div>
         <div class="dl-platform">macOS</div>
-        <div class="dl-detail">Apple Silicon · 28.4 MB</div>
-        <div class="dl-label">Download v0.1.0</div>
+        <div class="dl-detail">Apple Silicon · ~45 MB</div>
+        <div class="dl-label">Download v1.0.0-build.8</div>
       </a>
-      <a class="dl-btn" id="btn-win" href="MIRA-Agent-Windows.exe" download>
+      <a class="dl-btn" id="btn-win" href="https://github.com/Mira12D/Mira-Download/releases/download/v1.0.0-build.8/MIRA.Agent.Setup.1.0.0.exe" target="_blank">
         <div class="dl-icon">⊞</div>
         <div class="dl-platform">Windows</div>
-        <div class="dl-detail">64-bit Installer · 32.1 MB</div>
-        <div class="dl-label">Download v0.1.0</div>
+        <div class="dl-detail">64-bit Installer · ~50 MB</div>
+        <div class="dl-label">Download v1.0.0-build.8</div>
       </a>
     </div>
 
-    <div class="version-hint" id="version-hint">Version v0.1.0 — 2. März 2026</div>
+    <div class="version-hint">Version v1.0.0-build.8 — 2. März 2026</div>
   </div>
 
   <!-- Install Instructions -->
@@ -371,7 +371,7 @@
         <ol class="steps">
           <li class="step">
             <div class="step-num">1</div>
-            <div class="step-text"><strong>Installer herunterladen</strong> (MIRA-Agent-Windows.exe)</div>
+            <div class="step-text"><strong>Installer herunterladen</strong> (MIRA.Agent.Setup.1.0.0.exe)</div>
           </li>
           <li class="step">
             <div class="step-num">2</div>
@@ -397,13 +397,13 @@
     <div class="section-title">Integritätsprüfung</div>
     <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px;">
       <div style="margin-bottom: 16px;">
-        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA-Agent-Mac-arm64</div>
+        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA.Agent-1.0.0-arm64.dmg</div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); word-break: break-all; background: var(--bg); padding: 8px 12px; border-radius: 8px;">
           4bf3ea3e44a82e492841d429d4ceb0f38cf3a81b8c83260fdcb1e72c64aa5761
         </div>
       </div>
       <div>
-        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA-Agent-Windows</div>
+        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA.Agent.Setup.1.0.0.exe</div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); word-break: break-all; background: var(--bg); padding: 8px 12px; border-radius: 8px;">
           80b0f76109970cc4d63a1e33a32afd77fbcf27ecd9e997d85a07d8a378868cf7
         </div>
@@ -413,7 +413,8 @@
 
   <!-- Footer -->
   <footer>
-    MIRA Agent · v0.1.0 · <a href="#">Alle Releases</a>
+    MIRA Agent · v1.0.0-build.8 · 
+    <a href="https://github.com/Mira12D/Mira-Download/releases" target="_blank">Alle Releases auf GitHub</a>
   </footer>
 
 </div>
@@ -427,16 +428,6 @@
       setTimeout(() => btn.textContent = '⎘', 1500);
     });
   }
-
-  // Download-Funktionalität sicherstellen
-  document.getElementById('btn-mac-arm').addEventListener('click', function(e) {
-    // Datei existiert? Dann normal downloaden
-    console.log('Download macOS ARM');
-  });
-  
-  document.getElementById('btn-win').addEventListener('click', function(e) {
-    console.log('Download Windows');
-  });
 </script>
 </body>
 </html>
