@@ -572,7 +572,9 @@
 
   function copyCode(btn) {
     const block = btn.parentElement;
-    const text  = block.childNodes[0].textContent.trim();
+    // Extrahiere den Befehl (ohne den Button-Text)
+    const textNode = block.childNodes[0];
+    const text = textNode ? textNode.textContent.trim() : '';
     navigator.clipboard.writeText(text).then(() => {
       btn.textContent = '✓';
       setTimeout(() => btn.textContent = '⎘', 1500);
