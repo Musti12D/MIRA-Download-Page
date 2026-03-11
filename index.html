@@ -75,6 +75,35 @@
     .nav-name { font-size: 14px; font-weight: 700; }
     .nav-sub  { font-size: 11px; color: var(--text2); margin-top: 1px; }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .lang-option {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+      color: var(--text2);
+    }
+    .lang-option.active {
+      background: var(--green);
+      color: #000;
+    }
+
     .nav-version {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px; color: var(--text3);
@@ -276,19 +305,25 @@
       <div class="nav-mark">M</div>
       <div>
         <div class="nav-name">MIRA Agent</div>
-        <div class="nav-sub">Virtueller Mitarbeiter</div>
+        <div class="nav-sub" id="nav-sub">Virtueller Mitarbeiter</div>
       </div>
     </div>
-    <div class="nav-version">v1.0.0-build.8</div>
+    <div class="nav-right">
+      <div class="lang-toggle" onclick="toggleLanguage()">
+        <span class="lang-option" id="lang-de" style="background:#34c759;color:#000">DE</span>
+        <span class="lang-option" id="lang-en">EN</span>
+      </div>
+      <div class="nav-version" id="nav-version">v1.0.0-build.8</div>
+    </div>
   </nav>
 
   <!-- Hero -->
   <div class="hero">
-    <div class="hero-badge">Jetzt verfügbar</div>
+    <div class="hero-badge" id="hero-badge">Jetzt verfügbar</div>
 
-    <h1>Dein <span>KI-Mitarbeiter</span><br>für den PC</h1>
+    <h1 id="hero-title">Dein <span>KI-Mitarbeiter</span><br>für den PC</h1>
 
-    <p class="hero-sub">
+    <p class="hero-sub" id="hero-sub">
       MIRA lernt wie du arbeitest, führt Aufgaben aus, verarbeitet Dokumente
       und automatisiert deinen Büroalltag — auf Mac und Windows.
     </p>
@@ -297,24 +332,24 @@
     <div class="dl-grid">
       <a class="dl-btn" id="btn-mac-arm" href="https://github.com/Mira12D/Mira-Download/releases/download/v1.0.0-build.27/MIRA.Agent-1.0.0-arm64.dmg" target="_blank">
         <div class="dl-icon">⌘</div>
-        <div class="dl-platform">macOS</div>
-        <div class="dl-detail">Apple Silicon · ~45 MB</div>
-        <div class="dl-label">Download v1.0.0-build.8</div>
+        <div class="dl-platform" id="mac-platform">macOS</div>
+        <div class="dl-detail" id="mac-detail">Apple Silicon · ~45 MB</div>
+        <div class="dl-label" id="mac-label">Download v1.0.0-build.8</div>
       </a>
       <a class="dl-btn" id="btn-win" href="https://github.com/Mira12D/Mira-Download/releases/download/v1.0.0-build.27/MIRA.Agent.Setup.1.0.0.exe" target="_blank">
         <div class="dl-icon">⊞</div>
-        <div class="dl-platform">Windows</div>
-        <div class="dl-detail">64-bit Installer · ~50 MB</div>
-        <div class="dl-label">Download v1.0.0-build.8</div>
+        <div class="dl-platform" id="win-platform">Windows</div>
+        <div class="dl-detail" id="win-detail">64-bit Installer · ~50 MB</div>
+        <div class="dl-label" id="win-label">Download v1.0.0-build.8</div>
       </a>
     </div>
 
-    <div class="version-hint">Version v1.0.0-build.8 — 3. März 2026</div>
+    <div class="version-hint" id="version-hint">Version v1.0.0-build.8 — 3. März 2026</div>
   </div>
 
   <!-- Install Instructions -->
   <div class="section">
-    <div class="section-title">Installation</div>
+    <div class="section-title" id="install-title">Installation</div>
 
     <div class="install-cards">
 
@@ -323,18 +358,18 @@
         <div class="install-card-header">
           <div class="install-card-icon">⌘</div>
           <div>
-            <div class="install-card-title">macOS</div>
-            <div class="install-card-sub">Gatekeeper Bypass erforderlich</div>
+            <div class="install-card-title" id="mac-card-title">macOS</div>
+            <div class="install-card-sub" id="mac-card-sub">Gatekeeper Bypass erforderlich</div>
           </div>
         </div>
         <ol class="steps">
           <li class="step">
             <div class="step-num">1</div>
-            <div class="step-text"><strong>DMG öffnen</strong> und MIRA Agent in den <strong>Programme-Ordner</strong> ziehen</div>
+            <div class="step-text" id="mac-step-1"><strong>DMG öffnen</strong> und MIRA Agent in den <strong>Programme-Ordner</strong> ziehen</div>
           </li>
           <li class="step">
             <div class="step-num">2</div>
-            <div class="step-text">
+            <div class="step-text" id="mac-step-2">
               <strong>Terminal öffnen</strong> (Spotlight → Terminal) und ausführen:
               <div class="code-block">
                 sudo xattr -rd com.apple.quarantine "/Applications/MIRA Agent.app"
@@ -344,7 +379,7 @@
           </li>
           <li class="step">
             <div class="step-num">3</div>
-            <div class="step-text">
+            <div class="step-text" id="mac-step-3">
               App starten — aktuell nur über Befehl bei Mac *Gnampf:
               <div class="code-block">
                 "/Applications/MIRA Agent.app/Contents/MacOS/MIRA Agent"
@@ -353,7 +388,7 @@
             </div>
           </li>
         </ol>
-        <div class="warning-box">
+        <div class="warning-box" id="mac-warning">
           <strong>Hinweis:</strong> MIRA ist nicht durch Apple notarisiert.
           Der Terminal-Befehl entfernt die Quarantäne-Flag einmalig.
         </div>
@@ -364,27 +399,27 @@
         <div class="install-card-header">
           <div class="install-card-icon">⊞</div>
           <div>
-            <div class="install-card-title">Windows</div>
-            <div class="install-card-sub">NSIS Installer</div>
+            <div class="install-card-title" id="win-card-title">Windows</div>
+            <div class="install-card-sub" id="win-card-sub">NSIS Installer</div>
           </div>
         </div>
         <ol class="steps">
           <li class="step">
             <div class="step-num">1</div>
-            <div class="step-text"><strong>Installer herunterladen</strong> (MIRA.Agent.Setup.1.0.0.exe)</div>
+            <div class="step-text" id="win-step-1"><strong>Installer herunterladen</strong> (MIRA.Agent.Setup.1.0.0.exe)</div>
           </li>
           <li class="step">
             <div class="step-num">2</div>
-            <div class="step-text">
+            <div class="step-text" id="win-step-2">
               <strong>Rechtsklick → Als Administrator ausführen</strong>
-              <br><span style="font-size:11px;color:var(--text3);margin-top:4px;display:block">
+              <br><span style="font-size:11px;color:var(--text3);margin-top:4px;display:block" id="win-smartscreen">
                 Windows SmartScreen: "Weitere Informationen" → "Trotzdem ausführen"
               </span>
             </div>
           </li>
           <li class="step">
             <div class="step-num">3</div>
-            <div class="step-text">Installation abschließen — MIRA startet automatisch im System-Tray</div>
+            <div class="step-text" id="win-step-3">Installation abschließen — MIRA startet automatisch im System-Tray</div>
           </li>
         </ol>
       </div>
@@ -394,16 +429,16 @@
 
   <!-- SHA256 Hashes -->
   <div class="section">
-    <div class="section-title">Integritätsprüfung</div>
+    <div class="section-title" id="hash-title">Integritätsprüfung</div>
     <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px;">
       <div style="margin-bottom: 16px;">
-        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA.Agent-1.0.0-arm64.dmg</div>
+        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;" id="hash-mac">MIRA.Agent-1.0.0-arm64.dmg</div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); word-break: break-all; background: var(--bg); padding: 8px 12px; border-radius: 8px;">
           4bf3ea3e44a82e492841d429d4ceb0f38cf3a81b8c83260fdcb1e72c64aa5761
         </div>
       </div>
       <div>
-        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;">MIRA.Agent.Setup.1.0.0.exe</div>
+        <div style="font-size: 12px; color: var(--text2); margin-bottom: 6px;" id="hash-win">MIRA.Agent.Setup.1.0.0.exe</div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); word-break: break-all; background: var(--bg); padding: 8px 12px; border-radius: 8px;">
           80b0f76109970cc4d63a1e33a32afd77fbcf27ecd9e997d85a07d8a378868cf7
         </div>
@@ -413,13 +448,128 @@
 
   <!-- Footer -->
   <footer>
-    MIRA Agent · v1.0.0-build.8 · 
-    <a href="https://github.com/Mira12D/Mira-Download/releases" target="_blank">Alle Releases auf GitHub</a>
+    <span id="footer-text">MIRA Agent · v1.0.0-build.8 · </span>
+    <a href="https://github.com/Mira12D/Mira-Download/releases" target="_blank" id="footer-link">Alle Releases auf GitHub</a>
   </footer>
 
 </div>
 
 <script>
+  // ====================================
+  // INTERNATIONALIZATION (DE/EN)
+  // ====================================
+
+  const i18n = {
+    de: {
+      'nav-sub': 'Virtueller Mitarbeiter',
+      'hero-badge': 'Jetzt verfügbar',
+      'hero-title': 'Dein <span>KI-Mitarbeiter</span><br>für den PC',
+      'hero-sub': 'MIRA lernt wie du arbeitest, führt Aufgaben aus, verarbeitet Dokumente und automatisiert deinen Büroalltag — auf Mac und Windows.',
+      'mac-platform': 'macOS',
+      'mac-detail': 'Apple Silicon · ~45 MB',
+      'mac-label': 'Download v1.0.0-build.8',
+      'win-platform': 'Windows',
+      'win-detail': '64-bit Installer · ~50 MB',
+      'win-label': 'Download v1.0.0-build.8',
+      'version-hint': 'Version v1.0.0-build.8 — 3. März 2026',
+      'install-title': 'Installation',
+      'mac-card-title': 'macOS',
+      'mac-card-sub': 'Gatekeeper Bypass erforderlich',
+      'mac-step-1': '<strong>DMG öffnen</strong> und MIRA Agent in den <strong>Programme-Ordner</strong> ziehen',
+      'mac-step-2': '<strong>Terminal öffnen</strong> (Spotlight → Terminal) und ausführen:',
+      'mac-step-3': 'App starten — aktuell nur über Befehl bei Mac *Gnampf:',
+      'mac-warning': '<strong>Hinweis:</strong> MIRA ist nicht durch Apple notarisiert. Der Terminal-Befehl entfernt die Quarantäne-Flag einmalig.',
+      'win-card-title': 'Windows',
+      'win-card-sub': 'NSIS Installer',
+      'win-step-1': '<strong>Installer herunterladen</strong> (MIRA.Agent.Setup.1.0.0.exe)',
+      'win-step-2': '<strong>Rechtsklick → Als Administrator ausführen</strong>',
+      'win-smartscreen': 'Windows SmartScreen: "Weitere Informationen" → "Trotzdem ausführen"',
+      'win-step-3': 'Installation abschließen — MIRA startet automatisch im System-Tray',
+      'hash-title': 'Integritätsprüfung',
+      'hash-mac': 'MIRA.Agent-1.0.0-arm64.dmg',
+      'hash-win': 'MIRA.Agent.Setup.1.0.0.exe',
+      'footer-text': 'MIRA Agent · v1.0.0-build.8 · ',
+      'footer-link': 'Alle Releases auf GitHub',
+    },
+    en: {
+      'nav-sub': 'Virtual Assistant',
+      'hero-badge': 'Now available',
+      'hero-title': 'Your <span>AI Assistant</span><br>for the PC',
+      'hero-sub': 'MIRA learns how you work, performs tasks, processes documents and automates your office routine — on Mac and Windows.',
+      'mac-platform': 'macOS',
+      'mac-detail': 'Apple Silicon · ~45 MB',
+      'mac-label': 'Download v1.0.0-build.8',
+      'win-platform': 'Windows',
+      'win-detail': '64-bit Installer · ~50 MB',
+      'win-label': 'Download v1.0.0-build.8',
+      'version-hint': 'Version v1.0.0-build.8 — March 3, 2026',
+      'install-title': 'Installation',
+      'mac-card-title': 'macOS',
+      'mac-card-sub': 'Gatekeeper Bypass required',
+      'mac-step-1': '<strong>Open DMG</strong> and drag MIRA Agent to the <strong>Applications folder</strong>',
+      'mac-step-2': '<strong>Open Terminal</strong> (Spotlight → Terminal) and run:',
+      'mac-step-3': 'Start the app — currently only via command on Mac *Gnampf:',
+      'mac-warning': '<strong>Note:</strong> MIRA is not notarized by Apple. The terminal command removes the quarantine flag once.',
+      'win-card-title': 'Windows',
+      'win-card-sub': 'NSIS Installer',
+      'win-step-1': '<strong>Download installer</strong> (MIRA.Agent.Setup.1.0.0.exe)',
+      'win-step-2': '<strong>Right-click → Run as Administrator</strong>',
+      'win-smartscreen': 'Windows SmartScreen: "More info" → "Run anyway"',
+      'win-step-3': 'Complete installation — MIRA starts automatically in the system tray',
+      'hash-title': 'Integrity check',
+      'hash-mac': 'MIRA.Agent-1.0.0-arm64.dmg',
+      'hash-win': 'MIRA.Agent.Setup.1.0.0.exe',
+      'footer-text': 'MIRA Agent · v1.0.0-build.8 · ',
+      'footer-link': 'All releases on GitHub',
+    }
+  };
+
+  let currentLang = localStorage.getItem('mira_language') || 'de';
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'de' ? 'en' : 'de';
+    localStorage.setItem('mira_language', currentLang);
+    updateUILanguage();
+  }
+
+  function updateUILanguage() {
+    // Update toggle buttons
+    document.querySelectorAll('.lang-option').forEach(el => {
+      if (el.id === 'lang-de') {
+        el.style.background = currentLang === 'de' ? '#34c759' : 'transparent';
+        el.style.color = currentLang === 'de' ? '#000' : 'var(--text2)';
+      }
+      if (el.id === 'lang-en') {
+        el.style.background = currentLang === 'en' ? '#34c759' : 'transparent';
+        el.style.color = currentLang === 'en' ? '#000' : 'var(--text2)';
+      }
+    });
+
+    // Update all text elements
+    const elements = [
+      'nav-sub', 'hero-badge', 'hero-title', 'hero-sub',
+      'mac-platform', 'mac-detail', 'mac-label',
+      'win-platform', 'win-detail', 'win-label',
+      'version-hint', 'install-title',
+      'mac-card-title', 'mac-card-sub', 'mac-step-1', 'mac-step-2', 'mac-step-3', 'mac-warning',
+      'win-card-title', 'win-card-sub', 'win-step-1', 'win-step-2', 'win-smartscreen', 'win-step-3',
+      'hash-title', 'hash-mac', 'hash-win', 'footer-text', 'footer-link'
+    ];
+
+    elements.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === 'hero-title' || id === 'mac-step-1' || id === 'mac-step-2' || 
+            id === 'mac-step-3' || id === 'win-step-1' || id === 'win-step-2' || 
+            id === 'win-step-3' || id === 'mac-warning') {
+          el.innerHTML = i18n[currentLang][id];
+        } else {
+          el.textContent = i18n[currentLang][id];
+        }
+      }
+    });
+  }
+
   function copyCode(btn) {
     const block = btn.parentElement;
     const text  = block.childNodes[0].textContent.trim();
@@ -428,6 +578,9 @@
       setTimeout(() => btn.textContent = '⎘', 1500);
     });
   }
+
+  // Initialize language
+  updateUILanguage();
 </script>
 </body>
 </html>
